@@ -15,7 +15,7 @@ const cb = function (
   return [key, _value]
 }
 
-export abstract class ParamHelper {
+export class ParamHelper {
   constructor(private readonly config: ConfigService) {}
   parse(query: Record<string, string>): IQuery {
     const { limit, page, order, all, q, ...filter } = query
