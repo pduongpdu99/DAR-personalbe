@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { DatabaseModule } from '@common/modules/db'
 import { ThrottlerModule } from '@nestjs/throttler'
+import { UserModule } from './api/user/user.module'
 import CONFIGURATION from '@common/const'
 
 @Module({
@@ -18,6 +19,7 @@ import CONFIGURATION from '@common/const'
         },
       ],
     }),
+    UserModule,
   ],
 })
 export class AppModule {}

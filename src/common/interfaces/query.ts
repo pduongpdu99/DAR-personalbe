@@ -5,5 +5,5 @@ export interface IQuery {
   order: string
   q: string
   all: boolean
-  filter: [string, any][]
+  filter: [string, string | number][]
 }

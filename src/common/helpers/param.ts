@@ -2,6 +2,19 @@ import { IQuery } from '@i/query'
 import { ConfigService } from '@nestjs/config'
 import CONFIGURATION from '@common/const'
 
+const cb = function (
+  param: [string, string | number],
+): [string, string | number] {
+  const [key, value] = param
+  let _value: string | number = value
+
+  if (key.startsWith('int_')) {
+    _value = Number(value)
+  }
+
+  return [key, _value]
+}
+
 export abstract class ParamHelper {
   constructor(private readonly config: ConfigService) {}
   parse(query: Record<string, string>): IQuery {
@@ -25,7 +38,7 @@ export abstract class ParamHelper {
       order: _order,
       q: q ?? '',
       all: all === 'true',
-      filter: Object.entries(filter),
+      filter: Object.entries(filter).map(cb),
     }
   }
 }
