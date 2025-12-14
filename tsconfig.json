@@ -33,7 +33,13 @@
       ],
       "@common/*": [
         "src/common/*"
+      ],
+      "@entities/*": [
+        "src/api/user/entities/*"
+      ],
+      "@dto/*": [
+        "src/api/user/dto/*"
       ]
-    }
+    },
   }
 }
