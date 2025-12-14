@@ -23,4 +23,9 @@ export interface IConfiguration {
     LIMIT: number
     TTL: number // miliseconds
   }
+  ORM: {
+    ALIAS: {
+      USER: string
+    }
+  }
 }

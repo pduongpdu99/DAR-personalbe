@@ -17,10 +17,14 @@ const CONFIGURATION: IConfiguration = {
       USERNAME: 'root',
     },
   },
-  REDIS: {},
   RATE_LIMITING: {
     LIMIT: 10,
     TTL: 60 * 1000, // miliseconds
+  },
+  ORM: {
+    ALIAS: {
+      USER: 'user',
+    },
   },
 }
 
