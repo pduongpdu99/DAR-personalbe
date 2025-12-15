@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config'
 import { DatabaseModule } from '@common/modules/db'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { UserModule } from './api/user/user.module'
-import CONFIGURATION from '@common/const'
+import { CONFIGURATION } from '@common/const'
 
 @Module({
   imports: [

@@ -1,6 +1,6 @@
 import { IQuery } from '@i/query'
 import { ConfigService } from '@nestjs/config'
-import CONFIGURATION from '@common/const'
+import { CONFIGURATION } from '@common/const'
 
 const cb = function (
   param: [string, string | number],

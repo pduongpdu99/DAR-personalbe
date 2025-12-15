@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn } from 'typeorm'
 import { IsNumber } from 'class-validator'
-import CONFIGURATION from '@common/const'
+import { CONFIGURATION } from '@common/const'
 import { DecorEnum, DecorString } from '@common/decorator-combined'
 import { PhoneCode } from '@common/enums/define-field'
 

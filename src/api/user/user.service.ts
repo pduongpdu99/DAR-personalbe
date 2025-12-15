@@ -1,4 +1,4 @@
-import CONFIGURATION from '@common/const'
+import { CONFIGURATION } from '@common/const'
 import { UserCreate } from '@dto/user-create'
 import { UserUpdate } from '@dto/user-update'
 import { User } from '@entities/user.entity'
