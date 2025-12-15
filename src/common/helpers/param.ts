@@ -12,6 +12,10 @@ const cb = function (
     _value = Number(value)
   }
 
+  if (key.startsWith('bool_')) {
+    _value = Number(value)
+  }
+
   return [key, _value]
 }
 
