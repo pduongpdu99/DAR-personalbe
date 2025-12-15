@@ -1,3 +1,4 @@
+export type MultiType = string | number | boolean
 export interface IQuery {
   limit: number
   page: number
@@ -5,5 +6,5 @@ export interface IQuery {
   order: string
   q: string
   all: boolean
-  filter: [string, string | number][]
+  filter: [string, MultiType][]
 }

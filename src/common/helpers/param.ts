@@ -1,19 +1,19 @@
-import { IQuery } from '@i/query'
+import { IQuery, MultiType } from '@i/query'
 import { ConfigService } from '@nestjs/config'
 import { CONFIGURATION } from '@common/const'
 
-const cb = function (
-  param: [string, string | number],
-): [string, string | number] {
+type cbParamType = [string, MultiType]
+
+const cb = function (param: cbParamType): cbParamType {
   const [key, value] = param
-  let _value: string | number = value
+  let _value: MultiType = value
 
   if (key.startsWith('int_')) {
     _value = Number(value)
   }
 
   if (key.startsWith('bool_')) {
-    _value = Number(value)
+    _value = Boolean(value)
   }
 
   return [key, _value]
