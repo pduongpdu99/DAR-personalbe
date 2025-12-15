@@ -1,6 +1,6 @@
 import { IConfiguration } from '@i/const'
 
-const CONFIGURATION: IConfiguration = {
+export const CONFIGURATION: IConfiguration = {
   DEFAULT_VALUE: {
     PAGINATION: {
       LIMIT: '10',
@@ -28,4 +28,9 @@ const CONFIGURATION: IConfiguration = {
   },
 }
 
-export default CONFIGURATION
+export const ENDPOINT = {
+  USER: 'user',
+  ROLE: 'user',
+  CHAT: 'chat',
+  MESSAGE: 'message',
+}
