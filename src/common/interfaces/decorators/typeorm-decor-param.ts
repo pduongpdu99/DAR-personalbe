@@ -28,5 +28,5 @@ export abstract class BooleanDecoratorParam {
 export abstract class JsonDecoratorParam {
   isOptional?: boolean = false
   name?: string
-  defaultValue?: any = {}
+  defaultValue?: unknown = {}
 }
