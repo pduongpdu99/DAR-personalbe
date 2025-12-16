@@ -4,6 +4,9 @@ import { ThrottlerModule } from '@nestjs/throttler'
 import { UserModule } from './api/user/user.module'
 import { CONFIGURATION } from '@common/const'
 import { DBModule } from '@common/modules/db'
+import { RoomModule } from './api/room/room.module'
+import { MessageModule } from './api/message/message.module'
+import { ChatModule } from './api/chat/chat.module'
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { DBModule } from '@common/modules/db'
     }),
     DBModule,
     UserModule,
+    RoomModule,
+    MessageModule,
+    ChatModule,
   ],
 })
 export class AppModule {}

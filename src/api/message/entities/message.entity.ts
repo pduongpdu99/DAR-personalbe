@@ -13,7 +13,7 @@ import {
   DecorString,
 } from '@common/decorator-combined'
 
-@Entity(CONFIGURATION.ORM.ALIAS.USER)
+@Entity(CONFIGURATION.ORM.ALIAS.MESSAGE)
 export class Message {
   @PrimaryGeneratedColumn()
   @IsNumber()
@@ -47,8 +47,8 @@ export class Message {
   @DecorNumber({ name: 'room_id', defaultValue: 0 })
   roomId: number
 
-  @DecorNumber({ name: 'user_id', defaultValue: 0, isOptional: true })
-  userId?: number
+  @DecorNumber({ name: 'message_id', defaultValue: 0, isOptional: true })
+  messageId?: number
 
   @DecorNumber({ name: 'bot_id', defaultValue: 0, isOptional: true })
   botId?: number

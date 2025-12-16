@@ -1,7 +1,7 @@
 import { CONFIGURATION } from '@common/const'
-import { UserCreate } from '@dto/user-create'
-import { UserUpdate } from '@dto/user-update'
-import { User } from '@entities/user.entity'
+import { MessageCreate } from '@dto/message-create'
+import { MessageUpdate } from '@dto/message-update'
+import { Message } from '@entities/message.entity'
 import { ParamHelper } from '@helpers/param'
 import { CRUDImpl } from '@impl/service'
 import { Injectable } from '@nestjs/common'
@@ -10,14 +10,14 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
 @Injectable()
-export class UserService extends CRUDImpl<UserCreate, UserUpdate, User> {
+export class MessageService extends CRUDImpl<MessageCreate, MessageUpdate, Message> {
   constructor(
-    @InjectRepository(User) userRepo: Repository<User>,
+    @InjectRepository(Message) messageRepo: Repository<Message>,
     config: ConfigService,
   ) {
     super()
-    this.repo = userRepo
-    this.alias = CONFIGURATION.ORM.ALIAS.USER
+    this.repo = messageRepo
+    this.alias = CONFIGURATION.ORM.ALIAS.MESSAGE
     this.paramHelper = new ParamHelper(config)
   }
 }
