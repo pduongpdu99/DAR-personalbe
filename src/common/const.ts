@@ -24,12 +24,18 @@ export const CONFIGURATION: IConfiguration = {
   ORM: {
     ALIAS: {
       USER: 'user',
+      MESSAGE: 'message',
+      CHAT: 'chat',
+      MEDIA: 'media',
+      ROOM: 'room',
     },
   },
 }
 
 export const ENDPOINT = {
   USER: 'user',
-  CHAT: 'chat',
   MESSAGE: 'message',
+  CHAT: 'chat',
+  MEDIA: 'media',
+  ROOM: 'room',
 }

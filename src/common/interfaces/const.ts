@@ -26,6 +26,10 @@ export interface IConfiguration {
   ORM: {
     ALIAS: {
       USER: string
+      MESSAGE: string
+      ROOM: string
+      CHAT: string
+      MEDIA: string
     }
   }
 }
