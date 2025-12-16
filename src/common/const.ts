@@ -30,7 +30,6 @@ export const CONFIGURATION: IConfiguration = {
 
 export const ENDPOINT = {
   USER: 'user',
-  ROLE: 'user',
   CHAT: 'chat',
   MESSAGE: 'message',
 }
