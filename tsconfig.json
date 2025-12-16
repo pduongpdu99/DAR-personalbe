@@ -35,10 +35,16 @@
         "src/common/*"
       ],
       "@entities/*": [
-        "src/api/user/entities/*"
+        "src/api/user/entities/*",
+        "src/api/message/entities/*",
+        "src/api/chat/entities/*",
+        "src/api/room/entities/*"
       ],
       "@dto/*": [
-        "src/api/user/dto/*"
+        "src/api/user/dto/*",
+        "src/api/room/dto/*",
+        "src/api/chat/dto/*",
+        "src/api/message/dto/*"
       ]
     },
   }

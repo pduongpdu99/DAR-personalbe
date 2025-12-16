@@ -2,6 +2,7 @@ export abstract class StringDecoratorParam {
   isOptional?: boolean = false
   name?: string
   length?: number = 255
+  isText?: boolean = false
 }
 
 export abstract class EnumDecoratorParam {

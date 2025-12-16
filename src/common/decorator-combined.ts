@@ -21,7 +21,20 @@ export function DecorString({
   isOptional,
   length,
   name,
+  isText,
 }: StringDecoratorParam) {
+  if (isText) {
+    return applyDecorators(
+      Column({
+        name,
+        type: 'text',
+        ...(isOptional && { nullable: true }),
+      }),
+      IsString(),
+      ...(isOptional ? [IsOptional()] : []),
+    )
+  }
+
   const decorators: PropertyDecorator[] = [
     IsString(),
     ...(!isOptional ? [Min(1)] : []),
