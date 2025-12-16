@@ -1,5 +1,15 @@
 import { ICRUD } from '@i/crud'
 import { CRUDImpl } from './service'
+import {
+  Body,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common'
 
 export class CRUDController<
   C extends E,
@@ -7,19 +17,28 @@ export class CRUDController<
   E extends Record<string, any>,
 > implements ICRUD<C, U, E> {
   constructor(private service: CRUDImpl<C, U, E>) {}
-  find(query: Record<string, string>) {
+  @Get()
+  find(@Query() query: Record<string, string>) {
     return this.service.find(query)
   }
-  findById(id: number) {
+
+  @Get(':id')
+  findById(@Param('id', ParseIntPipe) id: number) {
     return this.service.findById(id)
   }
-  create(payload: C) {
+
+  @Post()
+  create(@Body() payload: C) {
     return this.service.create(payload)
   }
-  update(id: number, payload: U) {
+
+  @Patch(':id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() payload: U) {
     return this.service.update(id, payload)
   }
-  delete(id: number) {
+
+  @Delete(':id')
+  delete(@Param('id', ParseIntPipe) id: number) {
     return this.service.delete(id)
   }
 }
