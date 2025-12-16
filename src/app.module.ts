@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
-import { DatabaseModule } from '@common/modules/db'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { UserModule } from './api/user/user.module'
 import { CONFIGURATION } from '@common/const'
+import { DBModule } from '@common/modules/db'
 
 @Module({
   imports: [
-    DatabaseModule,
     ConfigModule.forRoot({
+      isGlobal: true,
       envFilePath: '.env.development.local',
     }),
     ThrottlerModule.forRoot({
@@ -19,6 +19,7 @@ import { CONFIGURATION } from '@common/const'
         },
       ],
     }),
+    DBModule,
     UserModule,
   ],
 })
