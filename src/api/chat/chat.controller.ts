@@ -2,11 +2,11 @@ import { ChatCreate } from '@dto/chat-create'
 import { ChatUpdate } from '@dto/chat-update'
 import { Chat } from '@entities/chat.entity'
 import { CRUDController } from '@impl/controller'
-import { Controller, Sse, UseInterceptors } from '@nestjs/common'
+import { Controller, Post, Sse, UseInterceptors } from '@nestjs/common'
 import { ChatService } from './chat.service'
 import { ENDPOINT } from '@common/const'
 import { FormatResponseInterceptor } from '@common/middlewares/format-response'
-import { interval, map } from 'rxjs'
+import { map, Subject } from 'rxjs'
 
 @Controller(ENDPOINT.CHAT)
 @UseInterceptors(FormatResponseInterceptor)
@@ -15,18 +15,24 @@ export class ChatController extends CRUDController<
   ChatUpdate,
   Chat
 > {
+  private readonly event$ = new Subject<any>()
+
   constructor(service: ChatService) {
     super(service)
   }
 
   @Sse('bot-response')
   retrieveBotRepsonse() {
-    const milisecs = 1000
-    return interval(milisecs).pipe(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      map((_) => {
-        return { hello: 'world' }
-      }),
+    return this.event$.pipe(
+      map((_: Record<string, unknown>) => ({
+        message: 'hello world',
+      })),
     )
+  }
+
+  @Post()
+  async create(payload: ChatCreate) {
+    this.event$.next(payload)
+    return await super.create(payload)
   }
 }
