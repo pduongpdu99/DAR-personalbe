@@ -38,5 +38,5 @@ export class Chat {
   isActive?: boolean
 
   @DecorString({})
-  name: string
+  content: string
 }

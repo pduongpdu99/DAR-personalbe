@@ -1,22 +1,24 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import helmet from 'helmet'
-// import { KafkaOptions, Transport } from '@nestjs/microservices'
 import { config } from 'dotenv'
+// import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-config({
-  path: '.env.development.local',
-})
+config({ path: '.env.development.local' })
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  if (!process.env.AMQP_URL) {
+    throw new Error('AMQP_URL is missing')
+  }
 
-  // await NestFactory.createMicroservice<KafkaOptions>(AppModule, {
-  //   transport: Transport.KAFKA,
+  // app.connectMicroservice<MicroserviceOptions>({
+  //   transport: Transport.RMQ,
   //   options: {
-  //     client: {
-  //       brokers: [process.env.AMQP_URL ?? 'localhost:9092'],
+  //     urls: [process.env.AMQP_URL],
+  //     queue: 'chat_queue',
+  //     queueOptions: {
+  //       durable: false,
   //     },
   //   },
   // })
@@ -24,8 +26,14 @@ async function bootstrap() {
   app.enableCors()
   app.use(helmet())
 
-  app.setGlobalPrefix('apis')
+  app.setGlobalPrefix('api/v1')
 
+  // connect(process.env.AMQP_URL ?? '', {
+  //   protocolVersion: 5,
+  // })
+
+  await app.startAllMicroservices()
   await app.listen(process.env.PORT ?? 3000)
 }
-bootstrap()
+
+void bootstrap()

@@ -2,11 +2,19 @@ import { ChatCreate } from '@dto/chat-create'
 import { ChatUpdate } from '@dto/chat-update'
 import { Chat } from '@entities/chat.entity'
 import { CRUDController } from '@impl/controller'
-import { Controller, Post, Sse, UseInterceptors } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Inject,
+  Post,
+  Sse,
+  UseInterceptors,
+} from '@nestjs/common'
 import { ChatService } from './chat.service'
-import { ENDPOINT } from '@common/const'
+import { ENDPOINT, AMQP_SERVICES } from '@common/const'
 import { FormatResponseInterceptor } from '@common/middlewares/format-response'
 import { map, Subject } from 'rxjs'
+import { ClientRMQ, MessagePattern } from '@nestjs/microservices'
 
 @Controller(ENDPOINT.CHAT)
 @UseInterceptors(FormatResponseInterceptor)
@@ -17,8 +25,12 @@ export class ChatController extends CRUDController<
 > {
   private readonly event$ = new Subject<any>()
 
-  constructor(service: ChatService) {
+  constructor(
+    @Inject(AMQP_SERVICES.CHAT) private chatClient: ClientRMQ,
+    service: ChatService,
+  ) {
     super(service)
+    void this.chatClient.connect()
   }
 
   @Sse('bot-response')
@@ -31,8 +43,8 @@ export class ChatController extends CRUDController<
   }
 
   @Post()
-  async create(payload: ChatCreate) {
-    this.event$.next(payload)
-    return await super.create(payload)
+  send(@Body() payload: ChatCreate) {
+    const routingKey = 'chat.bot'
+    return this.chatClient.send(routingKey, { prompt: payload.content })
   }
 }

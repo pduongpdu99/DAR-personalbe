@@ -39,3 +39,11 @@ export const ENDPOINT = {
   MEDIA: 'media',
   ROOM: 'room',
 }
+
+export const AMQP_SERVICES = {
+  CHAT: 'chat_service',
+}
+
+export const AMQP_QUEUE = {
+  CHAT: 'chat_queue',
+}
